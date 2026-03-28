@@ -104,5 +104,5 @@ def main():
             x = input("Please input the filepath for your clothing(-1 if finished): ")
     print(colors)
     return colors
-main()
+
 
