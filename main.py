@@ -66,9 +66,9 @@ def do_they_match(top_palette, bottom_palette, top_name, bottom_name):
                         clashes.append(f"{top_name} and {bottom_name}")
 
     if clashes:
-        return "This outfit may clash! If unsure try another combination."
+        print(f"This outfit may clash! If unsure try another combination.")
     else:
-        return "This outfit works together!"
+        print(f"This outfit works together!")
 
 
 def main():
@@ -104,5 +104,5 @@ def main():
             x = input("Please input the filepath for your clothing(-1 if finished): ")
     print(colors)
     return colors
-
+main()
 
