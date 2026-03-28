@@ -13,3 +13,6 @@ __pycache__/
 
 # Temp images
 temp_*.png
+
+#Environment variables
+.env

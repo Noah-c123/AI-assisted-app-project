@@ -1,6 +1,11 @@
 from PIL import Image
 from colorthief import ColorThief
 import webcolors
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+api_key = os.getenv("CLARIFAI_PAT")
 
 
 
