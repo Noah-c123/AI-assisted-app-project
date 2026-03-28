@@ -1,9 +1,7 @@
 from PIL import Image
 from colorthief import ColorThief
 import webcolors
-from colormath.color_objects import sRGBColor, LabColor
-from colormath.color_conversions import convert_color
-from colormath.color_diff import delta_e_cie2000
+
 
 
 
