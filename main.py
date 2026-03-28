@@ -66,9 +66,9 @@ def do_they_match(top_palette, bottom_palette, top_name, bottom_name):
                         clashes.append(f"{top_name} and {bottom_name}")
 
     if clashes:
-        print(f"Warning: This outfit may clash!")
+        return "This outfit may clash! If unsure try another combination."
     else:
-        print("This outfit works together!")
+        return "This outfit works together!"
 
 
 def main():
@@ -106,6 +106,3 @@ def main():
     return colors
 main()
 
-#C:\Users\NoahE\OneDrive\Desktop\Pink Shirt.png
-#C:\Users\NoahE\OneDrive\Desktop\Purple shirt.png
-# outfit 1    C:\Users\NoahE\OneDrive\Desktop\outfit 1.png
