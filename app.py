@@ -12,7 +12,7 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 from dotenv import load_dotenv
 
 load_dotenv()
-#
+
 app = FastAPI()
 
 app.add_middleware(
