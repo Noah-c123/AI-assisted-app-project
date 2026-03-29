@@ -52,7 +52,7 @@ def do_they_match(top_palette, bottom_palette, top_name, bottom_name):
     neutrals = ["white", "black", "grey", "gray", "beige", "cream", "ivory",
                 "navy", "tan", "brown", "khaki", "charcoal"]
 
-    # Check if either is a neutral
+    # Check if either is a neutral#
     top_is_neutral = any(n in top_name for n in neutrals)
     bottom_is_neutral = any(n in bottom_name for n in neutrals)
 
