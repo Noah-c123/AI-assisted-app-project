@@ -47,33 +47,59 @@ def get_delta_e(color1_rgb, color2_rgb):
 
 
 def do_they_match(top_palette, bottom_palette, top_name, bottom_name):
-    clashes = []
 
-    for top_color in top_palette:
-        for bottom_color in bottom_palette:
-            delta_e = get_delta_e(top_color, bottom_color)
+    # Colors that are neutrals - go with almost everything
+    neutrals = ["white", "black", "grey", "gray", "beige", "cream", "ivory",
+                "navy", "tan", "brown", "khaki", "charcoal"]
 
-            if delta_e < 30:
-                clashes.append("too similar")
-            elif delta_e < 100:
-                bad_pairs = [
-                    ("red", "green"),
-                    ("navy", "black"),
-                    ("blue", "purple"),
-                    ("orange", "purple"),
-                    ("red", "orange"),
-                    ("darkgreen", "brown"),
-                    ("blue", "grey")
-                ]
-                for pair in bad_pairs:
-                    if (pair[0] in top_name and pair[1] in bottom_name) or \
-                            (pair[1] in top_name and pair[0] in bottom_name):
-                        clashes.append(f"{top_name} and {bottom_name}")
+    # Check if either is a neutral
+    top_is_neutral = any(n in top_name for n in neutrals)
+    bottom_is_neutral = any(n in bottom_name for n in neutrals)
 
-    if clashes:
-        print(f"This outfit may clash! If unsure try another combination.")
-    else:
-        print(f"This outfit works together!")
+    if top_is_neutral or bottom_is_neutral:
+        return "This outfit works together!"
+
+    # Same color family = monochromatic = generally fine
+    color_families = [
+        ["blue", "navy", "slate", "steel", "sky", "cobalt", "teal", "cyan"],
+        ["red", "crimson", "scarlet", "maroon", "rose"],
+        ["green", "olive", "lime", "forest", "sage"],
+        ["purple", "violet", "lavender", "plum", "indigo"],
+        ["orange", "amber", "coral", "peach"],
+        ["pink", "blush", "magenta", "fuchsia"],
+        ["yellow", "gold", "mustard"],
+        ["brown", "tan", "camel", "rust", "copper"],
+    ]
+
+    top_family = None
+    bottom_family = None
+
+    for family in color_families:
+        if any(c in top_name for c in family):
+            top_family = family
+        if any(c in bottom_name for c in family):
+            bottom_family = family
+
+    # Same family = monochromatic outfit, totally fine
+    if top_family and bottom_family and top_family == bottom_family:
+        return "This outfit works together! (monochromatic look)"
+
+    # True clashes - these are the only real problem pairs
+    true_clashes = [
+        ("red", "orange"),
+        ("red", "pink"),
+        ("orange", "pink"),
+        ("yellow", "purple"),
+        ("green", "red"),
+    ]
+
+    for pair in true_clashes:
+        if (any(pair[0] in c for c in [top_name]) and any(pair[1] in c for c in [bottom_name])) or \
+           (any(pair[1] in c for c in [top_name]) and any(pair[0] in c for c in [bottom_name])):
+            return f"This outfit may clash! {top_name} and {bottom_name} don't work well together."
+
+    # Everything else is fine
+    return "This outfit works together!"
 
 
 def main():
@@ -103,11 +129,12 @@ def main():
             bottom_name = get_color_name(bottom_palette[0])
             print(f"Top color: {top_name}")
             print(f"Bottom color: {bottom_name}")
-            do_they_match(top_palette, bottom_palette, top_name, bottom_name)
+            result = do_they_match(top_palette, bottom_palette, top_name, bottom_name)
+            print(result)
             count += 1
 
             x = input("Please input the filepath for your clothing(-1 if finished): ")
     print(colors)
     return colors
-main()
+
 
